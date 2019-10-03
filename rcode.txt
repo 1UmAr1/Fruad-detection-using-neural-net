@@ -1,0 +1,241 @@
+fruad1 <- read.csv(file = file.choose(), header = T)
+fruad <- as.data.frame(fruad1)
+summary(fruad)
+fruad$Amount
+fruad$Class
+tail(fruad$Amount)
+table(fruad$Amount)
+which(is.na(fruad))
+summary(fruad$Class)
+set.seed(111)
+frac <- data.frame(fruad[1:30000, c(1:31)])
+frac2 <- data.frame(fruad[90000:12000, c(1:31)])
+hist(frac$V1)
+hist(frac$Time)
+hist(frac$Amount)
+hist(frac$Class)
+hist(frac$V2)
+hist(frac$V3)
+hist(frac$V4)
+hist(frac$V5)
+hist(frac$V6)
+hist(frac$V7)
+hist(frac$V8)
+hist(frac$V9)
+hist(frac$V10)
+hist(frac$V11)
+hist(frac$V12)
+hist(frac$V13)
+hist(frac$V14)
+hist(frac$V15)
+hist(frac$V16)
+hist(frac$V17)
+hist(frac$V18)
+hist(frac$V19)
+hist(frac$V20)
+hist(frac$V21)
+hist(frac$V22)
+hist(frac$V23)
+hist(frac$V24)
+hist(frac$V25)
+head(fruad)
+library(ggplot2)
+#this plot shows that the data is unbalanced as we don't have
+#many fruads
+ggplot(fruad, aes(x = Class)) +
+geom_bar() +
+ggtitle("Number of class labels")
+ggplot(fruad, aes(x = fruad$Class, y = fruad$Amount)) +
+geom_boxplot()+
+ggtitle("Distribution of transaction amount by class variable")
+ggplot(frac, aes(x = Class, y = Amount)) +
+geom_histogram() +
+ggtitle("amount vs class in frac")
+ggplot(frac, aes(x = Class, y = Amount)) +
+geom_boxplot() +
+ggtitle("amount vs class in frac")
+ggplot(frac, aes(x = frac$Class, y = frac$Amount)) +
+geom_boxplot() +
+ggtitle("amount vs class in frac")
+ggplot(frac, aes(x = frac$Class, y = frac$Amount)) +
+geom_boxplot() +
+ggtitle("amount vs class in frac")
+ggplot(frac, aes(x = frac$V1, y = frac$Amount)) +
+geom_boxplot() +
+ggtitle("amount vs class in frac")
+ggplot(frac, aes(x = frac$Time)) +
+geom_boxplot() +
+ggtitle("amount ")
+ggplot(frac, aes(x = frac$V2, y = Class)) +
+geom_boxplot() +
+ggtitle("amount ")
+# well its not working
+#compute the mean and median for each class
+fruad %>% group_by(Class) %>% summarise(mean(Amount), median(Amount))
+??%>%
+?%>%
+#the fruad cases have a heigher mean value(122)
+fruad$Class <- as.numeric(fruad$Class)
+# plotting a correlation plot for the variables
+library(corrplot)
+corrplot(cor(fruad[,-c(1)]), method = "square", type = "full", bg = "steelblue2")
+invalid <- fruad[which(fruad$Class == 1), ]
+invalid1 <- frac[which(frac$Class == 1), ]
+invalid2 <- frac2[which(frac2$Class == 1), ]
+cor(fruad$Time, fruad$Class)
+cor(fruad$Class, fruad$Amount)
+cor(fruad$V2, fruad$Class)
+cor(fruad$V11, fruad$Class)
+cor(fruad$V18, fruad$Class)
+#applying transformation to the
+#applying transformation to the Amount variable
+normalize <- function(x){
+return ((x - mean(x, na.rm = T))/sd(x, na.rm = T))
+}
+fruad$Amount <- normalize(fruad$Amount)
+fruad$Class
+str(fruad$Class)
+table(fruad$Class)
+summary(fruad$Class)
+train <- fruad$Class
+train2 <- data.frame(fruad$Class)
+length(unique(fruad$Class))
+ggplot(frac, aes(x = frac$V1, fill = frac$Class)) +
+geom_bar() +
+xlab("V1") +
+ylab("fruad") +
+labs(fill = "Fruads")
+ggplot(frac, aes(x = Class, y = V1)) +
+geom_boxplot() +
+xlab("V1") +
+ylab("fruad") +
+labs(fill = "Fruads")
+ggplot(frac, aes(x = frac$V3, fill = frac$Class)) +
+geom_bar() +
+xlab("V1") +
+ylab("fruad") +
+labs(fill = "Fruads")
+library(caret)
+library(Rtsne)
+set <-1:as.integer((0.1* nrow(fruad)))
+tss <- fruad[set, (-1)]
+tsss <- tss[set, (-30)]
+#not
+class <- as.factor(fruad$Class[set])
+ts <- as.data.frame(ts1$Y)
+set.seed(1345)
+fruad$Class <- as.numeric(fruad$Class)
+# creating 2 data sets one for training and one for testing
+traind <- createDataPartition(fruad$Class, times = 1, p = 0.8, list = F)
+# the test data set should be partioned from the train data set
+# if these two are not partioned we might train some of the data
+# that we want our algo to test on i.e test data set giving
+#us high prediction but will be mostly because overfitting
+trainf <- fruad[traind]
+testf <- fruad[!traind]
+traing <- fruad$Class[traind]
+testg <- fruad$Class[-traind]
+library(dplyr)
+library(brms)
+library(glmnet)
+#using random forest
+trainrf <- trainf
+trainrf$Class <- as.factor(trainrf$Class)
+trainf
+str(trainf)
+testf
+str(testf)
+# creating 2 data sets one for training and one for testing
+traind <- createDataPartition(fruad$Class, times = 1, p = 0.5, list = F)
+#prob
+trainf <- fruad[traind]
+testf <- fruad[!traind]
+str(trainf)
+trainf <- fruad[traind]
+testf <- fruad[!traind]
+traing <- fruad$Class[traind]
+testg <- fruad$Class[-traind]
+install.packages("kernlab")
+library(kernalab)
+install.packages("kernalab")
+predict(md1, test2, type = "response") > 0.5)
+predict((md1, test2, type = "response") > 0.5)
+predict((md1, test2)
+predict((md1,test2)
+plot(md1)
+cor(fruad$Time, fruad$Class)
+# similarly checking the correlation of other variables
+#the correlation is positive which means that their is some relation between
+#class and amount
+cor(fruad$Class, fruad$Amount)
+cor(fruad$V2, fruad$Class)
+cor(fruad$V11, fruad$Class)
+cor(fruad$V18, fruad$Class)
+normalize <- function(x){
+return ((x - mean(x, na.rm = T))/sd(x, na.rm = T))
+}
+fruad$Amount <- normalize(fruad$Amount)
+fruad$Class
+library(caret)
+library(Rtsne)
+set <-1:as.integer((0.1* nrow(fruad)))
+#removing variable time and class
+tss <- fruad[set, (-1)]
+tsss <- tss[set, (-30)]
+class <- as.factor(fruad$Class[set])
+ts <- as.data.frame(ts1$Y)
+#setting preplexity = 40
+tsne <- Rtsne(fruad[set,-c(1, 31)], perplexity = 40, theta = 0.5,
+pca = F, verbose = T, max_iter = 500, check_duplicates = F)
+class <- as.factor(fruad$Class[set])
+mt <- as.data.frame(tsne$Y)
+library(doSNOW)
+# have to register < R does not have auto register for dosnow
+cl <- makeCluster(8, type = "SOCK")
+registerDoSNOW(cl)
+ct <- trainControl(method = "cv",
+number = 20,
+verboseIter = T,
+classProbs = T,
+sampling = "smote",
+summaryFunction = twoClassSummary,
+savePredictions = T)
+train1_rf <- train1
+train1_rf$Class <- as.factor(train1_rf$Class)
+itrain <- createDataPartition(fruad$Class, times = 1, p = 0.8, list = F)
+fruad$Class <- as.numeric(fruad$Class)
+train1 <- fruad[itrain]
+test1 <- fruad[!itrain]
+train2 <- fruad[itrain]
+test2 <- fruad[-itrain]
+f <- as.formula(paste("Class ~ ", paste(fruad[!fruad %in% "Class"])))
+f2 <- reformulate(setdiff(colnames(fruad), "Class"), response = "Class")
+md1 <- neuralnet(formula = Class ~ ., fruad, hidden = 10, threshold = 0.05)
+library(neuralnet)
+md1 <- neuralnet(formula = Class ~ ., fruad, hidden = 10, threshold = 0.05)
+plot(md1)
+predict((md1,test2)
+pre <- predict((nn,test2)
+plot(nn)
+nn <- neuralnet(formula = Class ~ ., fruad, hidden = 3, act.fct = "logistic", linear.output = F)
+plot(nn)
+predd <- Predict$net.result
+predict = compute(nn, test1)
+predict = compute(nn, test2)
+predict = compute(nn, test2)
+predict = compute(nn, fruad$V1)
+predict = compute(nn, fruad)
+predict$net.result
+predd <- predict$net.result
+preddd <- ifelse(prob>0.5)
+preddd <- ifelse(predd>0.5)
+preddd <- ifelse(predd>0.5, 1, 0)
+preddd
+predict$net.result
+predict$net.result
+predict = compute(nn, fruad)
+predict
+preddd <- ifelse(predd>0.5, 1, 0)
+preddd
+write.csv(preddd, file = "Prediction", col.names = T)
+write.csv(preddd, file = "Prediction.csv", col.names = T)
